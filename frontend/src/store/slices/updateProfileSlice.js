@@ -47,7 +47,7 @@ export const updateProfile = (data) => async (dispatch) => {
   dispatch(updateProfileSlice.actions.updateProfileRequest());
   try {
     const response = await axios.put(
-      "http://localhost:4000/api/v1/user/update/profile",
+      "https://job-cohortlab-backend.onrender.com/api/v1/user/update/profile",
       data,
       {
         withCredentials: true,
