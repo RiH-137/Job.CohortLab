@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "start": "node server.js",
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "build": "npm rebuild bcrypt --build-from-source"
   },
   "author": "",
   "license": "ISC",
@@ -25,4 +26,5 @@
     "nodemailer": "^6.9.16",
     "validator": "^13.12.0"
   }
+  
 }
