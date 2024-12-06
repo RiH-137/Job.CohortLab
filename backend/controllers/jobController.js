@@ -77,6 +77,7 @@ export const postJob = catchAsyncErrors(async (req, res, next) => {
 
 // getting all the jobs that are posted by the employer
 export const getAllJobs = catchAsyncErrors(async (req, res, next) => {
+    console.log("GetAll Bro")
   const { city, niche, searchKeyword } = req.query;
 
   const query = {};
@@ -108,6 +109,7 @@ export const getAllJobs = catchAsyncErrors(async (req, res, next) => {
 
 // getting the jobs that are posted by the employer
 export const getMyJobs = catchAsyncErrors(async (req, res, next) => {
+    console.log("Get My Bro")
   const myJobs = await Job.find({ postedBy: req.user._id });
   res.status(200).json({
     success: true,
@@ -117,6 +119,7 @@ export const getMyJobs = catchAsyncErrors(async (req, res, next) => {
 
 // delete the job using params and deleteOne() method
 export const deleteJob = catchAsyncErrors(async (req, res, next) => {
+    console.log("Delete Bro")
   const { id } = req.params;
   const job = await Job.findById(id);
   if (!job) {
@@ -134,6 +137,7 @@ export const deleteJob = catchAsyncErrors(async (req, res, next) => {
 
 // get a single job using the id
 export const getASingleJob = catchAsyncErrors(async (req, res, next) => {
+    console.log("Single Bro")
   const { id } = req.params;
   const job = await Job.findById(id);
   if (!job) {
