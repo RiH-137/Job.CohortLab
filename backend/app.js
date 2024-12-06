@@ -17,12 +17,14 @@ const app = express();
 config({path: "./config/config.env"});
 
 // middleware: frontend-backend connection 
-app.use(cors({
-    origin:[process.env.FRONTEND_URL],
-    methods:["GET", "POST", "PUT", "DELETE"],
-    credentials: true,
+app.use(cors(
+//     {
+//     origin:[process.env.FRONTEND_URL],
+//     methods:["GET", "POST", "PUT", "DELETE"],
+//     credentials: true,
 
-}));
+// }
+));
 
 
 
