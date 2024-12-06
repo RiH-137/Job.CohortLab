@@ -18,12 +18,10 @@ config({path: "./config/config.env"});
 
 // middleware: frontend-backend connection 
 app.use(cors(
-//     {
-//     origin:[process.env.FRONTEND_URL],
-//     methods:["GET", "POST", "PUT", "DELETE"],
-//     credentials: true,
-
-// }
+            {
+ origin: 'https://job-cohortlab.onrender.com',
+  credentials: true,
+            }
 ));
 
 
