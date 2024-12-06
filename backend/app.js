@@ -54,7 +54,9 @@ app.use(fileUpload({
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/job", jobRouter);
 app.use("/api/v1/application", applicationRouter);
-
+app.get("/", (req, res) => {
+    return res.json({message: "Welcome to Job Portal API"});
+})
 
 // node-cron
 newsLetterCron();
