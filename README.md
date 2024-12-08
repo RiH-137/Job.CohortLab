@@ -51,24 +51,7 @@
 
 🔥 **Thank you for checking out CohortLab!** 🔥
 
-</div>
 
-<style>
-  @keyframes fadeIn {
-    0% { opacity: 0; transform: translateY(10px); }
-    100% { opacity: 1; transform: translateY(0); }
-  }
-
-  h1, h2, h3, p, img {
-    animation: fadeIn 1s ease-in-out;
-  }
-
-  a {
-    text-decoration: none;
-    color: #007BFF;
-    font-weight: bold;
-    transition: color 0.3s;
-  }
 
   a:hover {
     color: #0056b3;
