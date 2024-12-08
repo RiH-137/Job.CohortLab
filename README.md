@@ -52,8 +52,3 @@
 🔥 **Thank you for checking out CohortLab!** 🔥
 
 
-
-  a:hover {
-    color: #0056b3;
-  }
-</style>
