@@ -9,6 +9,7 @@ const Home = () => {
       <Hero />
       <TopNiches />
       <HowItWorks />
+      
     </>
   );
 };

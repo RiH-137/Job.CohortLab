@@ -28,11 +28,11 @@ const Footer = () => {
         <div>
           <h4>Quick Links</h4>
           <ul>
-            <li to={"/"}>
-              <Link>Home</Link>
+            <li>
+              <Link to={"/"}>Home</Link>
             </li>
-            <li to={"/jobs"}>
-              <Link>Jobs</Link>
+            <li>
+              <Link to={"/jobs"}>Jobs</Link>
             </li>
             {isAuthenticated && (
               <li>
@@ -69,22 +69,19 @@ const Footer = () => {
               </Link>
             </li>
             <li>
-              <Link to={"/"}>
+              <a
+                href="https://www.linkedin.com/company/cohortlab/posts/?feedView=all"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => console.log("LinkedIn clicked!")}
+              >
                 <span>
                   <FaLinkedin />
                 </span>
                 <span>
-                    <a
-                      href="https://www.linkedin.com/company/cohortlab/posts/?feedView=all"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={() => console.log("Link clicked!")}
-                    >
-                      LinkedIn
-                    </a>
-                  </span>
-
-              </Link>
+                  LinkedIn
+                </span>
+              </a>
             </li>
           </ul>
         </div>

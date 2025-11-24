@@ -2,8 +2,10 @@ import React from 'react'
 
 const Hero = () => {
   return (
-    <selection className="hero">
-        <h3> Take the Next Step Towards Your Dream Job with<h1>jobs.CohortLab</h1></h3>
+    <section className="hero">
+        <h3> Take the Next Step Towards Your Dream Job with{' '}
+          <span style={{color: '#007bff', fontWeight: 'bold'}}>jobs.CohortLab</span>
+        </h3>
         <h4>Linking Talent to Opportunities Across the World, for Every Skill Level!</h4>
 
         <div className='box'>
@@ -11,7 +13,7 @@ const Hero = () => {
         </div>
 
 
-    </selection>
+    </section>
   )
 }
 

@@ -84,7 +84,7 @@ export const fetchEmployerApplications = () => async (dispatch) => {
   dispatch(applicationSlice.actions.requestForAllApplications());
   try {
     const response = await axios.get(
-      `http://localhost:4000/api/v1/application/employer/getall`,
+      `${import.meta.env.VITE_API_BASE_URL}/api/v1/application/employer/getall`,
       {
         withCredentials: true,
       }
@@ -96,9 +96,10 @@ export const fetchEmployerApplications = () => async (dispatch) => {
     );
     dispatch(applicationSlice.actions.clearAllErrors());
   } catch (error) {
+    const errorMessage = error.response?.data?.message || error.message || "Failed to fetch employer applications. Please check if the server is running.";
     dispatch(
       applicationSlice.actions.failureForAllApplications(
-        error.response.data.message
+        errorMessage
       )
     );
   }
@@ -108,7 +109,7 @@ export const fetchJobSeekerApplications = () => async (dispatch) => {
   dispatch(applicationSlice.actions.requestForMyApplications());
   try {
     const response = await axios.get(
-      `http://localhost:4000/api/v1/application/jobseeker/getall`,
+      `${import.meta.env.VITE_API_BASE_URL}/api/v1/application/jobseeker/getall`,
       {
         withCredentials: true,
       }
@@ -120,9 +121,10 @@ export const fetchJobSeekerApplications = () => async (dispatch) => {
     );
     dispatch(applicationSlice.actions.clearAllErrors());
   } catch (error) {
+    const errorMessage = error.response?.data?.message || error.message || "Failed to fetch your applications. Please check if the server is running.";
     dispatch(
       applicationSlice.actions.failureForMyApplications(
-        error.response.data.message
+        errorMessage
       )
     );
   }
@@ -132,7 +134,7 @@ export const postApplication = (data, jobId) => async (dispatch) => {
   dispatch(applicationSlice.actions.requestForPostApplication());
   try {
     const response = await axios.post(
-      `http://localhost:4000/api/v1/application/post/${jobId}`,
+      `${import.meta.env.VITE_API_BASE_URL}/api/v1/application/post/${jobId}`,
       data,
       {
         withCredentials: true,
@@ -144,9 +146,10 @@ export const postApplication = (data, jobId) => async (dispatch) => {
     );
     dispatch(applicationSlice.actions.clearAllErrors());
   } catch (error) {
+    const errorMessage = error.response?.data?.message || error.message || "Failed to submit application. Please check if the server is running.";
     dispatch(
       applicationSlice.actions.failureForPostApplication(
-        error.response.data.message
+        errorMessage
       )
     );
   }
@@ -156,7 +159,7 @@ export const deleteApplication = (id) => async (dispatch) => {
   dispatch(applicationSlice.actions.requestForDeleteApplication());
   try {
     const response = await axios.delete(
-      `http://localhost:4000/api/v1/application/delete/${id}`,
+      `${import.meta.env.VITE_API_BASE_URL}/api/v1/application/delete/${id}`,
       { withCredentials: true }
     );
     dispatch(
@@ -166,9 +169,10 @@ export const deleteApplication = (id) => async (dispatch) => {
     );
     dispatch(clearAllApplicationErrors());
   } catch (error) {
+    const errorMessage = error.response?.data?.message || error.message || "Failed to delete application. Please check if the server is running.";
     dispatch(
       applicationSlice.actions.failureForDeleteApplication(
-        error.response.data.message
+        errorMessage
       )
     );
   }

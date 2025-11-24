@@ -122,7 +122,7 @@ export const register = (data) => async (dispatch) => {
   // backend frontend communication
   try {
     const response = await axios.post(
-      "http://localhost:4000/api/v1/user/register",
+      `${import.meta.env.VITE_API_BASE_URL}/api/v1/user/register`,
       data,
       {
         withCredentials: true,
@@ -134,7 +134,8 @@ export const register = (data) => async (dispatch) => {
     dispatch(userSlice.actions.clearAllErrors());
   } 
   catch (error) {
-    dispatch(userSlice.actions.registerFailed(error.response.data.message));
+    const errorMessage = error.response?.data?.message || error.message || "Failed to register. Please check if the server is running.";
+    dispatch(userSlice.actions.registerFailed(errorMessage));
   }
 };
 
@@ -146,7 +147,7 @@ export const login = (data) => async (dispatch) => {
   // sending a post request to the server
   try {
     const response = await axios.post(
-      "http://localhost:4000/api/v1/user/login",
+      `${import.meta.env.VITE_API_BASE_URL}/api/v1/user/login`,
       data,
       {
         withCredentials: true,
@@ -156,7 +157,8 @@ export const login = (data) => async (dispatch) => {
     dispatch(userSlice.actions.loginSuccess(response.data));
     dispatch(userSlice.actions.clearAllErrors());
   } catch (error) {
-    dispatch(userSlice.actions.loginFailed(error.response.data.message));
+    const errorMessage = error.response?.data?.message || error.message || "Failed to login. Please check if the server is running.";
+    dispatch(userSlice.actions.loginFailed(errorMessage));
   }
 };
 
@@ -166,7 +168,7 @@ export const getUser = () => async (dispatch) => {
   dispatch(userSlice.actions.fetchUserRequest());
   try {
     const response = await axios.get(
-      "http://localhost:4000/api/v1/user/getuser",
+      `${import.meta.env.VITE_API_BASE_URL}/api/v1/user/getuser`,
       {
         withCredentials: true,
       }
@@ -174,7 +176,8 @@ export const getUser = () => async (dispatch) => {
     dispatch(userSlice.actions.fetchUserSuccess(response.data.user));
     dispatch(userSlice.actions.clearAllErrors());
   } catch (error) {
-    dispatch(userSlice.actions.fetchUserFailed(error.response.data.message));
+    const errorMessage = error.response?.data?.message || error.message || "An error occurred while fetching user data";
+    dispatch(userSlice.actions.fetchUserFailed(errorMessage));
   }
 };
 
@@ -182,7 +185,7 @@ export const getUser = () => async (dispatch) => {
 export const logout = () => async (dispatch) => {
   try {
     const response = await axios.get(
-      "http://localhost:4000/api/v1/user/logout",
+      `${import.meta.env.VITE_API_BASE_URL}/api/v1/user/logout`,
       {
         withCredentials: true,
       }
@@ -190,7 +193,8 @@ export const logout = () => async (dispatch) => {
     dispatch(userSlice.actions.logoutSuccess());
     dispatch(userSlice.actions.clearAllErrors());
   } catch (error) {
-    dispatch(userSlice.actions.logoutFailed(error.response.data.message));
+    const errorMessage = error.response?.data?.message || error.message || "Failed to logout. Please check if the server is running.";
+    dispatch(userSlice.actions.logoutFailed(errorMessage));
   }
 };
 

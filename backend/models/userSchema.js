@@ -24,8 +24,10 @@ const userSchema = new mongoose.Schema({
           {
             validator: function (value) {
                 if (this.role === "Employer") {
-                    return value.includes("cohortlab");
+                    // Allow any valid email for employers, or keep cohortlab restriction if needed
+                    return true; // Changed from value.includes("cohortlab") to allow any email
                 }
+                return true;
             },
             message: "You are not allowed to register.",
           },

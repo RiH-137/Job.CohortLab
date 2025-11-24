@@ -18,7 +18,13 @@ config({path: "./config/config.env"});
 
 // middleware: frontend-backend connection 
 app.use(cors({
-    origin:[process.env.FRONTEND_URL],
+    origin: [
+        process.env.FRONTEND_URL,
+        process.env.FRONTEND_URL_LOCAL,
+        process.env.FRONTEND_URL_PRODUCTION,
+        "http://localhost:5173",
+        "https://job-cohortlab.onrender.com"
+    ],
     methods:["GET", "POST", "PUT", "DELETE"],
     credentials: true,
 
@@ -55,7 +61,9 @@ app.use("/api/v1/user", userRouter);
 app.use("/api/v1/job", jobRouter);
 app.use("/api/v1/application", applicationRouter);
 
-
+app.get("/", (req, res) => {
+    return res.json({message: "Welcome to Job Portal API"});
+})
 // node-cron
 newsLetterCron();
 
