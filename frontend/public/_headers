@@ -1,0 +1,5 @@
+/*
+  Access-Control-Allow-Origin: https://job-cohortlab-backend.onrender.com
+  Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS
+  Access-Control-Allow-Headers: Content-Type, Authorization, Cookie
+  Access-Control-Allow-Credentials: true

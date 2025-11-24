@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import api from "../../utils/axiosConfig";
 
 const userSlice = createSlice({
   name: "user",
@@ -121,11 +121,10 @@ export const register = (data) => async (dispatch) => {
   // sending a post request to the server
   // backend frontend communication
   try {
-    const response = await axios.post(
-      `${import.meta.env.VITE_API_BASE_URL}/api/v1/user/register`,
+    const response = await api.post(
+      "/api/v1/user/register",
       data,
       {
-        withCredentials: true,
         headers: { "Content-Type": "multipart/form-data" },
       }
     );
@@ -146,11 +145,10 @@ export const login = (data) => async (dispatch) => {
 
   // sending a post request to the server
   try {
-    const response = await axios.post(
-      `${import.meta.env.VITE_API_BASE_URL}/api/v1/user/login`,
+    const response = await api.post(
+      "/api/v1/user/login",
       data,
       {
-        withCredentials: true,
         headers: { "Content-Type": "application/json" },
       }
     );
@@ -167,11 +165,8 @@ export const login = (data) => async (dispatch) => {
 export const getUser = () => async (dispatch) => {
   dispatch(userSlice.actions.fetchUserRequest());
   try {
-    const response = await axios.get(
-      `${import.meta.env.VITE_API_BASE_URL}/api/v1/user/getuser`,
-      {
-        withCredentials: true,
-      }
+    const response = await api.get(
+      "/api/v1/user/getuser"
     );
     dispatch(userSlice.actions.fetchUserSuccess(response.data.user));
     dispatch(userSlice.actions.clearAllErrors());
@@ -184,11 +179,8 @@ export const getUser = () => async (dispatch) => {
 // logout action
 export const logout = () => async (dispatch) => {
   try {
-    const response = await axios.get(
-      `${import.meta.env.VITE_API_BASE_URL}/api/v1/user/logout`,
-      {
-        withCredentials: true,
-      }
+    const response = await api.get(
+      "/api/v1/user/logout"
     );
     dispatch(userSlice.actions.logoutSuccess());
     dispatch(userSlice.actions.clearAllErrors());

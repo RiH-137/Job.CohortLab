@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: job-cohortlab-backend
+    env: node
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+      - key: FRONTEND_URL
+        value: https://job-cohortlab.onrender.com
+      - key: FRONTEND_URL_PRODUCTION
+        value: https://job-cohortlab.onrender.com
+      - key: FRONTEND_URL_LOCAL
+        value: http://localhost:5173

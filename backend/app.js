@@ -23,12 +23,19 @@ app.use(cors({
         process.env.FRONTEND_URL_LOCAL,
         process.env.FRONTEND_URL_PRODUCTION,
         "http://localhost:5173",
-        "https://job-cohortlab.onrender.com"
+        "https://job-cohortlab.onrender.com",
+        "https://job-cohortlab-frontend.vercel.app"
     ],
     methods:["GET", "POST", "PUT", "DELETE"],
     credentials: true,
-
+    allowedHeaders: ["Content-Type", "Authorization", "Cookie"],
+    optionsSuccessStatus: 200
 }));
+
+// Handle preflight requests
+app.options('*', (req, res) => {
+    res.sendStatus(200);
+});
 
 
 

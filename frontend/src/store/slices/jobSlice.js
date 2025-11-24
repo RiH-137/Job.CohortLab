@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import api from "../../utils/axiosConfig";
 
 const jobSlice = createSlice({
   name: "jobs",
@@ -108,7 +108,7 @@ export const fetchJobs =
   async (dispatch) => {
     try {
       dispatch(jobSlice.actions.requestForAllJobs());
-      let link = `${import.meta.env.VITE_API_BASE_URL}/api/v1/job/getall?`;
+      let link = "/api/v1/job/getall?";
       let queryParams = [];
       if (searchKeyword) {
         queryParams.push(`searchKeyword=${searchKeyword}`);
@@ -121,7 +121,7 @@ export const fetchJobs =
       }
 
       link += queryParams.join("&");
-      const response = await axios.get(link, { withCredentials: true });
+      const response = await api.get(link);
       dispatch(jobSlice.actions.successForAllJobs(response.data.jobs));
       dispatch(jobSlice.actions.clearAllErrors());
     } catch (error) {
@@ -133,9 +133,8 @@ export const fetchJobs =
 export const fetchSingleJob = (jobId) => async (dispatch) => {
   dispatch(jobSlice.actions.requestForSingleJob());
   try {
-    const response = await axios.get(
-      `${import.meta.env.VITE_API_BASE_URL}/api/v1/job/get/${jobId}`,
-      { withCredentials: true }
+    const response = await api.get(
+      `/api/v1/job/get/${jobId}`
     );
     dispatch(jobSlice.actions.successForSingleJob(response.data.job));
     dispatch(jobSlice.actions.clearAllErrors());
@@ -148,10 +147,10 @@ export const fetchSingleJob = (jobId) => async (dispatch) => {
 export const postJob = (data) => async (dispatch) => {
   dispatch(jobSlice.actions.requestForPostJob());
   try {
-    const response = await axios.post(
-      `${import.meta.env.VITE_API_BASE_URL}/api/v1/job/post`,
+    const response = await api.post(
+      "/api/v1/job/post",
       data,
-      { withCredentials: true, headers: { "Content-Type": "application/json" } }
+      { headers: { "Content-Type": "application/json" } }
     );
     dispatch(jobSlice.actions.successForPostJob(response.data.message));
     dispatch(jobSlice.actions.clearAllErrors());
@@ -164,9 +163,8 @@ export const postJob = (data) => async (dispatch) => {
 export const getMyJobs = () => async (dispatch) => {
   dispatch(jobSlice.actions.requestForMyJobs());
   try {
-    const response = await axios.get(
-      `${import.meta.env.VITE_API_BASE_URL}/api/v1/job/getmyjobs`,
-      { withCredentials: true }
+    const response = await api.get(
+      "/api/v1/job/getmyjobs"
     );
     dispatch(jobSlice.actions.successForMyJobs(response.data.myJobs));
     dispatch(jobSlice.actions.clearAllErrors());
@@ -179,9 +177,8 @@ export const getMyJobs = () => async (dispatch) => {
 export const deleteJob = (id) => async (dispatch) => {
   dispatch(jobSlice.actions.requestForDeleteJob());
   try {
-    const response = await axios.delete(
-      `${import.meta.env.VITE_API_BASE_URL}/api/v1/job/delete/${id}`,
-      { withCredentials: true }
+    const response = await api.delete(
+      `/api/v1/job/delete/${id}`
     );
     dispatch(jobSlice.actions.successForDeleteJob(response.data.message));
     dispatch(clearAllJobErrors());
