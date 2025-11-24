@@ -1,8 +1,32 @@
 import axios from 'axios';
 
+// Determine the correct base URL
+const getBaseURL = () => {
+  // First try environment variable
+  const envBaseURL = import.meta.env.VITE_API_BASE_URL;
+  
+  // If environment variable exists and is not localhost, use it
+  if (envBaseURL && !envBaseURL.includes('localhost')) {
+    return envBaseURL;
+  }
+  
+  // Check if we're in production (deployed)
+  const isProduction = window.location.hostname !== 'localhost';
+  
+  if (isProduction) {
+    // We're in production, use production backend URL
+    return 'https://job-cohortlab-backend.onrender.com';
+  } else {
+    // We're in development, use local backend
+    return 'http://localhost:3000';
+  }
+};
+
+const baseURL = getBaseURL();
+
 // Create an axios instance with default configuration
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL,
+  baseURL: baseURL,
   withCredentials: true,
   timeout: 30000, // 30 seconds timeout
   headers: {
@@ -15,6 +39,8 @@ api.interceptors.request.use(
   (config) => {
     // Log the request for debugging
     console.log(`Making request to: ${config.baseURL}${config.url}`);
+    console.log('Environment:', import.meta.env.VITE_API_BASE_URL);
+    console.log('Current hostname:', window.location.hostname);
     return config;
   },
   (error) => {
